@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block content%}
+<h2>Hi teacher!<h2>
+        {% for teacher in tcs%}
+        <h3>Teacher: <a href="{% url 'teacher' teacher.id}"></a> {{ teacher.id }}</h3>
+        <div>
+            <div>
+                <label><b>Name: </b></label> {{ teacher.name }}
+            </div>
+            <div>
+                <label><b>Surmane: </b></label> {{ teacher.surname }}
+            </div>
+            <div>
+                <label><b>Age: </b></label> {{ teacher.age }}
+            </div>
+        </div>
+        <br />
+        {% endfor %}
+        {% endblock %}
