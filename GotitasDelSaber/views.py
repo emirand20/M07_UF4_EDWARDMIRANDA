@@ -1,6 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render, redirect
 from .forms import TeacherForm
 from .forms import StudentForm
 
@@ -234,10 +232,21 @@ def students(request):
 
 def teacher_form(request):
     form = TeacherForm()
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index_one')
+        
     context = {'form':form}
     return render(request, 'formTeacher.html', context)
 
 def student_form(request):
     form = StudentForm()
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index_one')
     context = {'form':form}
     return render(request, 'formStudent.html', context)
