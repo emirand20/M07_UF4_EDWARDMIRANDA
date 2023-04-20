@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from .forms import TeacherForm
+from .forms import StudentForm
 
 teachers = [
     {
@@ -229,3 +231,13 @@ def student(request, st):
 def students(request):
     context = {'std': alumns}
     return render(request, 'students.html', context)
+
+def teacher_form(request):
+    form = TeacherForm()
+    context = {'form':form}
+    return render(request, 'formTeacher.html', context)
+
+def student_form(request):
+    form = StudentForm()
+    context = {'form':form}
+    return render(request, 'formStudent.html', context)
