@@ -65,7 +65,6 @@ def teacher_update(request, pk):
     
     return render(request, 'formTeacher.html', context)
 
-
 def student_update(request, st):
     estudiante = Student.objects.get(id = st)
     form = StudentForm(instance=estudiante)
@@ -78,3 +77,23 @@ def student_update(request, st):
         
     context = {'form':form}
     return render(request, 'formStudent.html', context)
+
+def teacher_delete(request, pk):
+    profesor = Teacher.objects.get(id = pk)
+    
+    if request.mothod == 'POST':
+        profesor.delete()
+        return redirect('proffs')
+
+    context = {'object': profesor}
+    return render(request, 'deleteProffs.html', context)
+
+def student_delete(request, st):
+    alumno = Student.objects.get(id = st)
+    
+    if request.mothod == 'POST':
+        alumno.delete()
+        return redirect('students')
+
+    context = {'object': alumno}
+    return render(request, 'deleteStudents.html', context)
