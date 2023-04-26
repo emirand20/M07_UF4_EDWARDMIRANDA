@@ -50,3 +50,30 @@ def student_form(request):
             return redirect('students')
     context = {'form':form}
     return render(request, 'formStudent.html', context)
+
+def teacher_update(request, teacher_id):
+    profesor = Teacher.objects.get(Teacher, id = teacher_id)
+    form = teacher_form(instance=profesor)
+    
+    if request.method == 'POST':
+        form = teacher_form(request.POST, instance=profesor)
+        if form.is_valid():
+            form.save()
+            return redirect('proffs', args=(teacher_id,))
+    else:
+        form = TeacherForm(instance=profesor)
+    return render(request, 'proffs.html', {'form': form, 'teacher':profesor})
+
+
+def student_update(request, st):
+    estudiante = Student.objects.get(id = st)
+    form = teacher_form(instance=estudiante)
+    
+    if request.method == 'POST':
+        form = student_form(request.POST, instance=estudiante)
+        if form.is_valid():
+            form.save()
+            return redirect('students')
+        
+    context = {'formStudent':form}
+    return render(request, 'formStudent.html', context)

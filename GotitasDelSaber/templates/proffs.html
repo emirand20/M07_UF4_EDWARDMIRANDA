@@ -13,6 +13,7 @@
             <div>
                 <label><b>Age: </b></label> {{ teacher.age }}
             </div>
+            <td><a href="{% url 'teacher_update' teacher.id}">EDIT</a></td>
         </div>
         <br />
         {% endfor %}
